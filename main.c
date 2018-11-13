@@ -41,17 +41,31 @@ int main(void) {
         case START:
             // Wait for VBlank
             waitForVBlank();
-
-            // TA-TODO: Draw the start state here.
+			
+            // Draw the start state here.
+			drawRectDMA(0, 60, 240, 40, BLUE);
+			drawCenteredString(0, 0, 240, 160, "Press A to start." , WHITE);
 
             state = START_NODRAW;
             break;
         case START_NODRAW:
-            // TA-TODO: Check for a button press here to start the app.
+            //Check for a button press here to start the app.
             // Start the app by switching the state to APP_INIT.
-
+			if (KEY_JUST_PRESSED(BUTTON_A, currentButtons, previousButtons)) {
+				state = APP_INIT;
+			}
+			
+		
             break;
         case APP_INIT:
+		//junk i added
+			waitForVBlank();
+			
+            // Draw the start state here.
+			fillScreenDMA(BLACK);
+			drawCenteredString(0, 0, 240, 160, "Game Started", WHITE);
+		//end of junk i added
+
             // Initialize the app. Switch to the APP state.
             initializeAppState(&currentAppState);
 

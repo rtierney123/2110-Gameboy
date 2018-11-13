@@ -4,17 +4,20 @@ volatile unsigned short *videoBuffer = (volatile unsigned short *)0x6000000;
 u32 vBlankCounter = 0;
 
 void waitForVBlank(void) {
-    // TA-TODO: IMPLEMENT
 
     // Write a while loop that loops until we're NOT in vBlank anymore:
     // (This prevents counting one VBlank more than once if your app is too fast)
-
-
+	while(*SCANLINECOUNTER > 160){
+	
+	}
+  
     // Write a while loop that keeps going until we're in vBlank:
-
+	while(*SCANLINECOUNTER < 160){
+	
+	}
 
     // Finally, increment the vBlank counter:
-
+	vBlankCounter++;
 
 }
 
@@ -29,19 +32,30 @@ int randint(int min, int max) {
 }
 
 void setPixel(int x, int y, u16 color) {
-    // TA-TODO: IMPLEMENT
-    UNUSED(x);
-    UNUSED(y);
-    UNUSED(color);
+	// check if coord is out of bounds
+	int maxX = 240;
+	int maxY = 160;
+	if (x < 0 || x >= maxX || y < 0 || y >= maxY){
+		return;
+	}
+
+	//find index to place Pixel
+	//1) calculate index of complete rows
+	int completeRows = maxX * y;
+	//2) Add remaining indexes
+	int pixelIndex = completeRows + x;
+
+	videoBuffer[pixelIndex] = color;
+ 
 }
 
 void drawRectDMA(int x, int y, int width, int height, volatile u16 color) {
-    // TA-TODO: IMPLEMENT
-    UNUSED(x);
-    UNUSED(y);
-    UNUSED(width);
-    UNUSED(height);
-    UNUSED(color);
+
+     for (int r = 0; r < height; r++) {
+		DMA[3].src = &color;
+		DMA[3].dst = &videoBuffer[OFFSET(r + y, x, 240)];
+		DMA[3].cnt = width | DMA_ON | DMA_SOURCE_FIXED;
+     }
 }
 
 void drawFullScreenImageDMA(u16 *image) {
@@ -59,8 +73,7 @@ void drawImageDMA(int x, int y, int width, int height, u16 *image) {
 }
 
 void fillScreenDMA(volatile u16 color) {
-    // TA-TODO: IMPLEMENT
-    UNUSED(color);
+    drawRectDMA(0, 0, 240, 160, color);
 }
 
 void drawChar(int col, int row, char ch, u16 color) {
@@ -95,3 +108,5 @@ void drawCenteredString(int x, int y, int width, int height, char *str, u16 colo
     int row = y + ((height - strHeight) >> 1);
     drawString(col, row, str, color);
 }
+
+
