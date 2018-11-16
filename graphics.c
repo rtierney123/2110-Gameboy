@@ -17,13 +17,15 @@
 void fullDrawAppState(AppState *state) {
 	drawAllTiles(state);
 	drawGrid(3, 3, 60, 40, 4);
+	drawRectDMA(0, 0, 4, 160, BLACK);
+	drawRectDMA(236, 0, 4, 160, BLACK);
 	drawPlayer(state->playerX, state->playerY);
 }
 
 // This function will be used to undraw (i.e. erase) things that might
 // move in a frame. E.g. in a Snake game, erase the Snake, the food & the score.
 void undrawAppState(AppState *state) {
-	drawGrid(3, 3, 60, 40, 4);
+	//drawGrid(3, 3, 60, 40, 4);
 	drawEmptyRect(60 * (state->playerX), 40 * (state->playerY), 60, 40, 4, BLACK);
 }
 

@@ -81,28 +81,24 @@ void drawEmptyRect(int x , int y, int width, int height, int thickness, volatile
 	drawRectDMA(x, y, thickness, height, color);
 
 	//right
-	drawRectDMA(x + width, y, thickness, height, color);
-	/*
 	if(x + width + thickness >=240){
-		drawRectDMA(x + width - thickness, y, thickness, height, color);
+		drawRectDMA(240 - thickness, y, thickness, height, color);
 	} else {
 		
-		drawRectDMA(x + width, y, thickness, height, color);
+		drawRectDMA(x + width, y, thickness, height + thickness, color);
 	}
-	*/
+	
 	
 	//top
 	drawRectDMA(x, y, width, thickness, color);
 
 	//bottom
-	drawRectDMA(x, y + height, width + thickness, thickness, color);
-	/*
 	if (y + height + thickness >= 160){
-		drawRectDMA(x, y + height - thickness, width, thickness, color);
+		drawRectDMA(x, 160 - thickness, width, thickness, color);
 	} else {
 		drawRectDMA(x, y + height, width, thickness, color);
 	}
-	*/
+	
 }
 
 void drawGrid(int numVert, int numHorz, int width, int height, int thickness){

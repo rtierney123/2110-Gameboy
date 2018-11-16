@@ -64,7 +64,7 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 		}
 	}
 	if (KEY_JUST_PRESSED(BUTTON_LEFT, keysPressedBefore, keysPressedNow)) {
-		if (nextAppState.playerY > 0){
+		if (nextAppState.playerX > 0){
 			nextAppState.playerX--;
 		}
 	}
