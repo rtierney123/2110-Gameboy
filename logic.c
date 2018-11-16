@@ -1,10 +1,15 @@
 #include "logic.h"
+#include "gba.h"
 
-void initializeAppState(AppState* appState) {
+void initializeAppState(AppState* appState, const u16* gameImage) {
     // TA-TODO: Initialize everything that's part of this AppState struct here.
     // Suppose the struct contains random values, make sure everything gets
     // the value it should have when the app begins.
-    UNUSED(appState);
+	//Store all image info
+	initializeTiles(appState, gameImage);
+	//start player at bottom right
+	appState->playerX = 3;
+	appState->playerY = 3;
 }
 
 // TA-TODO: Add any process functions for sub-elements of your app here.
@@ -42,9 +47,54 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
      */
 
     AppState nextAppState = *currentAppState;
-
-    UNUSED(keysPressedBefore);
-    UNUSED(keysPressedNow);
+	//register player keys
+	if (KEY_JUST_PRESSED(BUTTON_UP, keysPressedBefore, keysPressedNow)) {
+		if (nextAppState.playerY > 0){
+			nextAppState.playerY--;
+		}
+	}
+	if (KEY_JUST_PRESSED(BUTTON_DOWN, keysPressedBefore, keysPressedNow)) {
+		if (nextAppState.playerY < 3){
+			nextAppState.playerY++;
+		}
+	}
+	if (KEY_JUST_PRESSED(BUTTON_RIGHT, keysPressedBefore, keysPressedNow)) {
+		if (nextAppState.playerX < 3){
+			nextAppState.playerX++;
+		}
+	}
+	if (KEY_JUST_PRESSED(BUTTON_LEFT, keysPressedBefore, keysPressedNow)) {
+		if (nextAppState.playerY > 0){
+			nextAppState.playerX--;
+		}
+	}
+	if (KEY_JUST_PRESSED(BUTTON_A, keysPressedBefore, keysPressedNow)) {
+				
+	}
 
     return nextAppState;
 }
+
+//generate and store all the tiles, in the correct order
+void initializeTiles(AppState *appState, const u16 *image){
+
+	for(int x = 0; x < 4; x++){
+		for (int y = 0; y < 4; y++){
+			if (x != 3 || y != 3){
+				appState->gameTiles[x][y].image = getPartialImage(x*60, y*40, 60, 40, 240, 160, image);
+				appState->gameTiles[x][y].x = x;
+				appState->gameTiles[x][y].y = y;
+				appState->gameTiles[x][y].isEmpty = 0;
+			} else {
+				appState->gameTiles[x][y].image = getSingleColorImage(60, 40, BLACK);
+				appState->gameTiles[x][y].x = x;
+				appState->gameTiles[x][y].y = y;
+				appState->gameTiles[x][y].isEmpty = 0;
+			}
+			
+		}
+	}
+}
+
+
+

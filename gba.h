@@ -136,12 +136,21 @@ int randint(int min, int max);
 // ---------------------------------------------------------------------------
 void setPixel(int x, int y, u16 color);
 void drawRectDMA(int x, int y, int width, int height, volatile u16 color);
-void drawFullScreenImageDMA(u16 *image);
-void drawImageDMA(int x, int y, int width, int height, u16 *image);
+void drawFullScreenImageDMA(const u16 *image);
+void drawImageDMA(int x, int y, int width, int height, const u16 *image);
 void fillScreenDMA(volatile u16 color);
 void drawChar(int col, int row, char ch, u16 color);
 void drawString(int col, int row, char *str, u16 color);
 void drawCenteredString(int col, int row, int width, int height, char *str, u16 color);
+
+//return image array for part of image
+u16 *getPartialImage(int x, int y, int width, int height, int imageW, int imageH, const u16 *original);
+//return a singel color image array
+u16 *getSingleColorImage(int width, int height, volatile u16 color);
+//draw image grid
+void drawGrid(int numVert, int numHorz, int width, int height, int thinkness);
+//draw player pointer
+void drawEmptyRect(int x , int y, int width, int height, int thinkness, volatile u16 color );
 
 /** Contains the pixels of each character from a 6x8 font */
 // This is in the font.c file. You can replace the font if you want.

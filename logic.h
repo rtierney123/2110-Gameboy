@@ -3,9 +3,20 @@
 
 #include "gba.h"
 
+typedef struct{
+	u16 *image;
+	int x;
+	int y;
+	int isEmpty;
+} tile;
+
 typedef struct {
     // Store whether or not the game is over in this member:
     int gameOver;
+	tile gameTiles[4][4];
+	u16 *gameImage;
+	int playerX;
+	int playerY;
 
     /*
     * TA-TODO: Add any logical elements you need to keep track of in your app.
@@ -34,8 +45,14 @@ typedef struct {
 *
 */
 
+
+
+
+//intialize the gameTile map
+void initializeTiles(AppState *appState, const u16 *image);
+
 // This function can initialize an unused AppState struct.
-void initializeAppState(AppState *appState);
+void initializeAppState(AppState *appState, const u16* gameImage);
 
 // This function will be used to process app frames.
 AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 keysPressedNow);

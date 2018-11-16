@@ -18,4 +18,13 @@ void drawAppState(AppState *state);
 // If you have anything else you need accessible from outside the graphics.c
 // file, you can add them here. You likely won't.
 
+//draw all the tiles in gameTiles
+void drawAllTiles(AppState *appState);
+
+//draw player according to new dir
+void drawPlayer(int pX, int pY);
+
+int getDrawY(int y);
+int getDrawX(int x);
+
 #endif
