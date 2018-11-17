@@ -4,16 +4,10 @@
 #include "gba.h"
 
 typedef struct{
-	int x;
-	int y;
-} position;
-
-typedef struct{
 	u16 *image;
 	int x;
 	int y;
 	int isEmpty;
-	position correct;
 } tile;
 
 typedef struct {
