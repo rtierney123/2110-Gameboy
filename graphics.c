@@ -28,7 +28,7 @@ void fullDrawAppState(AppState *state) {
 // This function will be used to undraw (i.e. erase) things that might
 // move in a frame. E.g. in a Snake game, erase the Snake, the food & the score.
 void undrawAppState(AppState *state) {
-	drawGrid(3, 3, 60, 40, 4);
+	//drawGrid(3, 3, 60, 40, 4);
 	drawEmptyRect(60 * (state->playerX), 40 * (state->playerY), 60, 40, 4, BLACK);
 }
 
@@ -37,17 +37,31 @@ void undrawAppState(AppState *state) {
 void drawAppState(AppState *state) {
 	drawPlayer(state->playerX, state->playerY);
 	if (state->isMoved == 1){
-		drawCenteredString(0, 0, 240, 160, "Moved." , WHITE);
 		int pX = state->playerX;
 		int pY = state->playerY;
 		tile* empty = findAdjacentEmptyTile(pX, pY, state->gameTiles);
-		tile currentTile = state->gameTiles[pX][pY];
-		int oldX = currentTile.x;
-		int oldY = currentTile.y;
-		int newX = empty->x;
-		int newY = empty->y;
-		drawImageDMA(60*newX, 40*newY, 60, 40, currentTile.image);
-		drawRectDMA(60*oldX, 40*oldY, 60, 40, BLACK);
+
+		if(empty != NULL){
+
+			tile currentTile = state->gameTiles[pX][pY];
+			int oldX = currentTile.x;
+			int oldY = currentTile.y;
+			int newX = empty->x;
+			int newY = empty->y;
+		
+			drawImageDMA(60*newX, 40*newY, 60, 40, currentTile.image);
+			drawRectDMA(60*oldX, 40*oldY, 60, 40, BLACK);
+			currentTile.x = newX;
+			currentTile.y = newY;
+			empty->x = oldX;
+			empty->y = oldY;
+			tile temp = *empty;
+			state->gameTiles[newX][newY] = currentTile;
+			state->gameTiles[oldX][oldY] = temp;
+		}
+	
+		
+	
 		/*
 		int cX = state->playerX;
 		int cY = state->playerY;
