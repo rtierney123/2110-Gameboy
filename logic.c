@@ -12,8 +12,6 @@ void initializeAppState(AppState* appState, const u16* gameImage) {
 	appState->playerX = 3;
 	appState->playerY = 3;
 	appState->isMoved = 0;
-	appState->emptyX = 3;
-	appState->emptyY = 3;
 
 }
 
@@ -56,30 +54,9 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 
 
 	if (KEY_JUST_PRESSED(BUTTON_A, keysPressedBefore, keysPressedNow)) {
-	/*
-		int pX = nextAppState.playerX;
-		int pY = nextAppState.playerY;
-		
-		//test for empty left
-		if (nextAppState.emptyX == pX - 1 && nextAppState.emptyY == pY) {
-			nextAppState.isMoved = 1;
-		}
-		//test for empty right
-		else if(nextAppState.emptyX == pX + 1 && nextAppState.emptyY == pY) {
-			nextAppState.isMoved = 1;
-		}
-		//test for empty top
-		else if (nextAppState.emptyX == pX && nextAppState.emptyY == pY - 1) {
-			nextAppState.isMoved = 1;
-		}
-		//test for empty bottom
-		else if (nextAppState.emptyX == pX && nextAppState.emptyY == pY + 1) {
-			nextAppState.isMoved = 1;
-		} else {
-			nextAppState.isMoved = 0;
-		}
-		*/
-		
+		nextAppState.isMoved = 1;
+	} else {
+		nextAppState.isMoved = 0;
 	}
 
 	//register player keys
