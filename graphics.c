@@ -60,16 +60,6 @@ void drawAppState(AppState *state) {
 			state->gameTiles[oldX][oldY] = temp;
 		}
 	
-		
-	
-		/*
-		int cX = state->playerX;
-		int cY = state->playerY;
-		int newX = state->emptyX;
-		int newY = state->emptyY;
-		tile currentTile = state->gameTiles[cX][cY];
-		drawImageDMA(60*newX, 40*newY, 60, 40, currentTile.image);
-		*/
 	}
 	
 }

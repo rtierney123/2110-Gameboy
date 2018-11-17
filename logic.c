@@ -13,7 +13,7 @@ void initializeAppState(AppState* appState, const u16* gameImage) {
 	appState->playerX = 3;
 	appState->playerY = 3;
 	appState->isMoved = 0;
-	shuffleTiles(appState->gameTiles);
+	//appState->gameTiles = shuffleTiles(appState->gameTiles);
 
 }
 
@@ -135,7 +135,7 @@ tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
 //return shuffled tile array
 void shuffleTiles(tile gameTiles[4][4]){
 	int shuffleNum = rand() % 20;
-	shuffleNum = shuffleNum + 5;
+	//shuffleNum = shuffleNum + 5;
 	
 	int emptyX = 3;
 	int emptyY = 3;
