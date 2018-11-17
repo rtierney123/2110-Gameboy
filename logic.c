@@ -54,11 +54,10 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 	
 
 	if (KEY_JUST_PRESSED(BUTTON_A, keysPressedBefore, keysPressedNow)) {
-		drawCenteredString(0, 0, 240, 160, "Moved." , WHITE);
 		nextAppState.isMoved = 1;
 	
 	} else {
-		//nextAppState.isMoved = 0;
+		nextAppState.isMoved = 0;
 	}
 
 	//register player keys
@@ -108,23 +107,23 @@ void initializeTiles(AppState *appState, const u16 *image){
 	}
 }
 
-tile *findAdjacentEmptyTile(int cX, int cY, tile *gameTiles[4][4]){
+tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
 	
 		//test for empty left
-		if (cX > 0 &&  gameTiles[cX-1][cY]->isEmpty == 1) {
-			return gameTiles[cX-1][cY];
+		if (cX > 0 &&  gameTiles[cX-1][cY].isEmpty == 1) {
+			return &gameTiles[cX-1][cY];
 		}
 		//test for empty right
-		else if(cX < 3 &&  gameTiles[cX+1][cY]->isEmpty == 1) {
-			return gameTiles[cX+1][cY];
+		else if(cX < 3 &&  gameTiles[cX+1][cY].isEmpty == 1) {
+			return &gameTiles[cX+1][cY];
 		}
 		//test for empty top
-		else if (cY > 0 && gameTiles[cX][cY-1]->isEmpty == 1) {
-			return gameTiles[cX][cY-1];
+		else if (cY > 0 && gameTiles[cX][cY-1].isEmpty == 1) {
+			return &gameTiles[cX][cY-1];
 		}
 		//test for empty bottom
-		else if (cY < 3 &&  gameTiles[cX][cY+1]->isEmpty == 1) {
-			return gameTiles[cX][cY+1];
+		else if (cY < 3 &&  gameTiles[cX][cY+1].isEmpty == 1) {
+			return &gameTiles[cX][cY+1];
 		} else {
 			return NULL;
 		}

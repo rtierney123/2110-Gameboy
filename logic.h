@@ -60,5 +60,5 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 
 // If you have anything else you need accessible from outside the logic.c
 // file, you can add them here. You likely won't.
-tile *findAdjacentEmptyTile(int cX, int cY, tile *gameTiles[4][4]);
+tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]);
 #endif
