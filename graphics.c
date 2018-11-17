@@ -17,8 +17,6 @@
 void fullDrawAppState(AppState *state) {
 	drawAllTiles(state);
 	drawGrid(3, 3, 60, 40, 4);
-	drawRectDMA(0, 0, 4, 160, BLACK);
-	drawRectDMA(236, 0, 4, 160, BLACK);
 	drawPlayer(state->playerX, state->playerY);
 }
 
@@ -33,6 +31,16 @@ void undrawAppState(AppState *state) {
 // For example, in a Snake game, draw the snake, the food, the score.
 void drawAppState(AppState *state) {
 	drawPlayer(state->playerX, state->playerY);
+	//swap tiles if empty is next to currentTile
+	if(state->tileMoved == 1){
+		//int newX = state->newX;
+		//int newY = state->newY;
+		//int oldX = state->currentX;
+		//int oldY = state->currentY;
+		//u16 *currentImage = state->gameTiles[oldX][oldY]->image;
+		//drawImageDMA(60 * newX, 40 * newY, 60, 40, currentImage);
+		//drawRectDMA(60 * oldX, 40 * oldY, 60, 40, BLACK);
+	}
 }
 
 //undraw player and updates player position
@@ -43,11 +51,14 @@ void drawPlayer(int pX, int pY){
 void drawAllTiles(AppState *appState){
 	for(int x = 0; x < 4; x++){
 		for (int y = 0; y < 4; y++){
-			u16 *image = appState->gameTiles[x][y].image;
+			u16 *image = appState->gameTiles[x][y]->image;
 			drawImageDMA(60*x, 40*y, 60, 40, image);
 		}
 	}
 }
+
+
+
 
 
 
