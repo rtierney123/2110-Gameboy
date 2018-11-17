@@ -70,7 +70,30 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 			nextAppState.playerX--;
 		}
 	}
+	/*
+	if (KEY_JUST_PRESSED(BUTTON_A, keysPressedBefore, keysPressedNow)) {
+		int pX = nextAppState.playerX;
+		int pY = nextAppState.playerY;
+	
+		//test for empty left
+		if (nextAppState.emptyX == pX - 1 && nextAppState.emptyY == pY) {
+			nextAppState.isMoved = 1;
+		}
+		//test for empty right
+		else if(nextAppState.emptyX == pX + 1 && nextAppState.emptyY == pY) {
+			nextAppState.isMoved = 1;
+		}
+		//test for empty top
+		else if (nextAppState.emptyX == pX && nextAppState.emptyY == pY - 1) {
+			nextAppState.isMoved = 1;
+		}
+		//test for empty bottom
+		else if (nextAppState.emptyX == pX && nextAppState.emptyY == pY + 1) {
+			nextAppState.isMoved = 1;
+		}
 
+	}
+	*/
 
     return nextAppState;
 }
