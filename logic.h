@@ -7,8 +7,7 @@ typedef struct{
 	u16 *image;
 	int x;
 	int y;
-	int correctX;
-	int correctY;
+	int isEmpty;
 } tile;
 
 typedef struct {
@@ -18,10 +17,6 @@ typedef struct {
 	u16 *gameImage;
 	int playerX;
 	int playerY;
-
-	int isMoved;
-	int emptyX;
-	int emptyY;
 
     /*
     * TA-TODO: Add any logical elements you need to keep track of in your app.
