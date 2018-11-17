@@ -44,18 +44,20 @@ void drawAppState(AppState *state) {
 		if(empty != NULL){
 
 			tile currentTile = state->gameTiles[pX][pY];
+			int oldX = currentTile.x;
+			int oldY = currentTile.y;
 			int newX = empty->x;
 			int newY = empty->y;
 		
 			drawImageDMA(60*newX, 40*newY, 60, 40, currentTile.image);
-			drawRectDMA(60*pX, 40*pY, 60, 40, BLACK);
-			//currentTile.x = newX;
-			//currentTile.y = newY;
-			//empty->x = oldX;
-			//empty->y = oldY;
+			drawRectDMA(60*oldX, 40*oldY, 60, 40, BLACK);
+			currentTile.x = newX;
+			currentTile.y = newY;
+			empty->x = oldX;
+			empty->y = oldY;
 			tile temp = *empty;
 			state->gameTiles[newX][newY] = currentTile;
-			state->gameTiles[pX][pY] = temp;
+			state->gameTiles[oldX][oldY] = temp;
 		}
 	
 		
