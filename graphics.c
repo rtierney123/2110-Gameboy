@@ -21,8 +21,6 @@ void fullDrawAppState(AppState *state) {
 	drawRectDMA(0, 0, 4, 160, BLACK);
 	drawRectDMA(236, 0, 4, 160, BLACK);
 	drawPlayer(state->playerX, state->playerY);
-
-	
 }
 
 // This function will be used to undraw (i.e. erase) things that might
@@ -60,16 +58,6 @@ void drawAppState(AppState *state) {
 			state->gameTiles[oldX][oldY] = temp;
 		}
 	
-		
-	
-		/*
-		int cX = state->playerX;
-		int cY = state->playerY;
-		int newX = state->emptyX;
-		int newY = state->emptyY;
-		tile currentTile = state->gameTiles[cX][cY];
-		drawImageDMA(60*newX, 40*newY, 60, 40, currentTile.image);
-		*/
 	}
 	
 }
