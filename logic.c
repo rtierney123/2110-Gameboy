@@ -56,7 +56,6 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 
 
 	if (KEY_JUST_PRESSED(BUTTON_A, keysPressedBefore, keysPressedNow)) {
-		nextAppState.isMoved = 1;
 	/*
 		int pX = nextAppState.playerX;
 		int pY = nextAppState.playerY;
@@ -81,8 +80,6 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 		}
 		*/
 		
-	} else {
-		nextAppState.isMoved = 0;
 	}
 
 	//register player keys
@@ -127,8 +124,6 @@ void initializeTiles(AppState *appState, const u16 *image){
 		}
 	}
 }
-
-
 
 
 
