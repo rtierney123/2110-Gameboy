@@ -72,8 +72,10 @@ int main(void) {
             state = APP;
             break;
         case APP:
-            // Process the app for one frame, store the next state
-            nextAppState = processAppState(&currentAppState, previousButtons, currentButtons);
+			// Process the app for one frame, store the next state
+			nextAppState = processAppState(&currentAppState, previousButtons, currentButtons);
+		
+        
 
             // Wait for VBlank before we do any drawing.
             waitForVBlank();
