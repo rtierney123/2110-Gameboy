@@ -1,5 +1,6 @@
 #include "logic.h"
 #include "gba.h"
+#include "stdio.h"
 
 void initializeAppState(AppState* appState, const u16* gameImage) {
     // TA-TODO: Initialize everything that's part of this AppState struct here.
@@ -10,6 +11,10 @@ void initializeAppState(AppState* appState, const u16* gameImage) {
 	//start player at bottom right
 	appState->playerX = 3;
 	appState->playerY = 3;
+	appState->isMoved = 0;
+	appState->emptyX = 3;
+	appState->emptyY = 3;
+
 }
 
 // TA-TODO: Add any process functions for sub-elements of your app here.
@@ -47,6 +52,36 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
      */
 
     AppState nextAppState = *currentAppState;
+
+
+
+	if (KEY_JUST_PRESSED(BUTTON_A, keysPressedBefore, keysPressedNow)) {
+	/*
+		int pX = nextAppState.playerX;
+		int pY = nextAppState.playerY;
+		
+		//test for empty left
+		if (nextAppState.emptyX == pX - 1 && nextAppState.emptyY == pY) {
+			nextAppState.isMoved = 1;
+		}
+		//test for empty right
+		else if(nextAppState.emptyX == pX + 1 && nextAppState.emptyY == pY) {
+			nextAppState.isMoved = 1;
+		}
+		//test for empty top
+		else if (nextAppState.emptyX == pX && nextAppState.emptyY == pY - 1) {
+			nextAppState.isMoved = 1;
+		}
+		//test for empty bottom
+		else if (nextAppState.emptyX == pX && nextAppState.emptyY == pY + 1) {
+			nextAppState.isMoved = 1;
+		} else {
+			nextAppState.isMoved = 0;
+		}
+		*/
+		
+	}
+
 	//register player keys
 	if (KEY_JUST_PRESSED(BUTTON_UP, keysPressedBefore, keysPressedNow)) {
 		if (nextAppState.playerY > 0){
@@ -68,27 +103,8 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 			nextAppState.playerX--;
 		}
 	}
-	if (KEY_JUST_PRESSED(BUTTON_A, keysPressedBefore, keysPressedNow)) {
-		int pX = nextAppState.playerX;
-		int pY = nextAppState.playerY;
-	
-		//test for empty left
-		if (nextAppState.emptyX == pX - 1 && nextAppState.emptyY == pY) {
-			nextAppState.isMoved = 1;
-		}
-		//test for empty right
-		else if(nextAppState.emptyX == pX + 1 && nextAppState.emptyY == pY) {
-			nextAppState.isMoved = 1;
-		}
-		//test for empty top
-		else if (nextAppState.emptyX == pX && nextAppState.emptyY == pY - 1) {
-			nextAppState.isMoved = 1;
-		}
-		//test for empty bottom
-		else if (nextAppState.emptyX == pX && nextAppState.emptyY == pY + 1) {
-			nextAppState.isMoved = 1;
-		}
-	}
+	//nextAppState.emptyX = 3;
+	//nextAppState.emptyY = 3;
 
     return nextAppState;
 }
