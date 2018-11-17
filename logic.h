@@ -13,16 +13,11 @@ typedef struct{
 typedef struct {
     // Store whether or not the game is over in this member:
     int gameOver;
-	tile *gameTiles[4][4];
+	tile gameTiles[4][4];
 	u16 *gameImage;
 	int playerX;
 	int playerY;
 
-	int tileMoved;
-	int currentX;
-	int currentY;
-	int newX;
-	int newY;
     /*
     * TA-TODO: Add any logical elements you need to keep track of in your app.
     *

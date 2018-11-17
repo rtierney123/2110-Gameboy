@@ -10,7 +10,6 @@ void initializeAppState(AppState* appState, const u16* gameImage) {
 	//start player at bottom right
 	appState->playerX = 3;
 	appState->playerY = 3;
-	appState->tileMoved = 0;
 }
 
 // TA-TODO: Add any process functions for sub-elements of your app here.
@@ -69,48 +68,9 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 			nextAppState.playerX--;
 		}
 	}
-
 	if (KEY_JUST_PRESSED(BUTTON_A, keysPressedBefore, keysPressedNow)) {
-		int pX = nextAppState.playerX;
-		int pY = nextAppState.playerY;
-		tile *currentTile =  nextAppState.gameTiles[pX][pY];
-		int cX = currentTile->x;
-		int cY = currentTile->y;
-		//test for empty left
-		if (cX > 0 &&  nextAppState.gameTiles[cX-1][cY]->isEmpty == 1) {
-			nextAppState.tileMoved = 1;
-			nextAppState.newX = pX - 1;
-			nextAppState.newY = pY;
-		}
-		//test for empty right
-		else if(cX < 3 &&  nextAppState.gameTiles[cX+1][cY]->isEmpty == 1) {
-			nextAppState.tileMoved = 1;
-			nextAppState.newX = pX + 1;
-			nextAppState.newY = pY;
-		}
-		//test for empty top
-		else if (cY > 0 &&  nextAppState.gameTiles[cX][cY-1]->isEmpty == 1) {
-			nextAppState.tileMoved = 1;
-			nextAppState.newX = pX;
-			nextAppState.newY = pY - 1;
-		}
-		//test for empty bottom
-		else if (cY < 3 &&  nextAppState.gameTiles[cX][cY+1]->isEmpty == 1) {
-			nextAppState.tileMoved = 1;
-			nextAppState.newX = pX;
-			nextAppState.newY = pY + 1;
-		}
-
-		if(nextAppState.tileMoved == 1){
-			nextAppState.currentX = pX;
-			nextAppState.currentY = pY;
-		}
+				
 	}
-
-
-
-
-
 
     return nextAppState;
 }
@@ -121,22 +81,20 @@ void initializeTiles(AppState *appState, const u16 *image){
 	for(int x = 0; x < 4; x++){
 		for (int y = 0; y < 4; y++){
 			if (x != 3 || y != 3){
-				appState->gameTiles[x][y]->image = getPartialImage(x*60, y*40, 60, 40, 240, 160, image);
-				appState->gameTiles[x][y]->x = x;
-				appState->gameTiles[x][y]->y = y;
-				appState->gameTiles[x][y]->isEmpty = 0;
+				appState->gameTiles[x][y].image = getPartialImage(x*60, y*40, 60, 40, 240, 160, image);
+				appState->gameTiles[x][y].x = x;
+				appState->gameTiles[x][y].y = y;
+				appState->gameTiles[x][y].isEmpty = 0;
 			} else {
-				appState->gameTiles[x][y]->image = getSingleColorImage(60, 40, BLACK);
-				appState->gameTiles[x][y]->x = x;
-				appState->gameTiles[x][y]->y = y;
-				appState->gameTiles[x][y]->isEmpty = 0;
+				appState->gameTiles[x][y].image = getSingleColorImage(60, 40, BLACK);
+				appState->gameTiles[x][y].x = x;
+				appState->gameTiles[x][y].y = y;
+				appState->gameTiles[x][y].isEmpty = 0;
 			}
 			
 		}
 	}
 }
-
-
 
 
 
