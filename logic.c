@@ -104,7 +104,6 @@ void initializeTiles(AppState *appState, const u16 *image){
 				appState->gameTiles[x][y].y = y;
 				appState->gameTiles[x][y].isEmpty = 1;
 			}
-			
 		}
 	}
 }
@@ -153,11 +152,11 @@ void shuffleTiles(tile gameTiles[4][4]){
 		if ((emptyX + chooseX <= 3 && emptyX + chooseX >= 0) &&
 				(emptyY + chooseY <= 3 && emptyY + chooseY >= 0)){
 			tile empty = gameTiles[emptyX][emptyY];
-			empty.x = emptyX + chooseX;
-			empty.y = emptyY + chooseY;
+			//empty.x = emptyX + chooseX;
+			//empty.y = emptyY + chooseY;
 			tile swapTile = gameTiles[emptyX + chooseX][emptyY + chooseY];
-			swapTile.x = emptyX;
-			swapTile.y = emptyY;
+			//swapTile.x = emptyX;
+			//swapTile.y = emptyY;
 			gameTiles[emptyX + chooseX][emptyY + chooseY] = empty;
 			gameTiles[emptyX][emptyY] = swapTile;
 		}
