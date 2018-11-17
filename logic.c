@@ -1,6 +1,7 @@
 #include "logic.h"
 #include "gba.h"
 #include "stdio.h"
+#include "stdlib.h"
 
 void initializeAppState(AppState* appState, const u16* gameImage) {
     // TA-TODO: Initialize everything that's part of this AppState struct here.
@@ -12,6 +13,7 @@ void initializeAppState(AppState* appState, const u16* gameImage) {
 	appState->playerX = 3;
 	appState->playerY = 3;
 	appState->isMoved = 0;
+	shuffleTiles(appState->gameTiles);
 
 }
 
@@ -107,6 +109,7 @@ void initializeTiles(AppState *appState, const u16 *image){
 	}
 }
 
+//return pointer to empty adjacent tile
 tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
 	
 		//test for empty left
@@ -127,5 +130,38 @@ tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
 		} else {
 			return NULL;
 		}
+}
+
+//return shuffled tile array
+void shuffleTiles(tile gameTiles[4][4]){
+	int shuffleNum = rand() % 20;
+	shuffleNum = shuffleNum + 5;
+	
+	int emptyX = 3;
+	int emptyY = 3;
+	while (shuffleNum > 0){
+
+		int chooseX = rand() % 2;
+		if (chooseX == 0){
+			chooseX = -1;
+		}
+		int chooseY = rand() % 2;
+		if (chooseY == 0){
+			chooseY = -1;
+		}
+
+		if ((emptyX + chooseX <= 3 && emptyX + chooseX >= 0) &&
+				(emptyY + chooseY <= 3 && emptyY + chooseY >= 0)){
+			tile empty = gameTiles[emptyX][emptyY];
+			empty.x = emptyX + chooseX;
+			empty.y = emptyY + chooseY;
+			tile swapTile = gameTiles[emptyX + chooseX][emptyY + chooseY];
+			swapTile.x = emptyX;
+			swapTile.y = emptyY;
+			gameTiles[emptyX + chooseX][emptyY + chooseY] = empty;
+			gameTiles[emptyX][emptyY] = swapTile;
+		}
+		shuffleNum--;
+	}
 }
 

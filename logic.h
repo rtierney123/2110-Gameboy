@@ -58,7 +58,9 @@ void initializeAppState(AppState *appState, const u16* gameImage);
 // This function will be used to process app frames.
 AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 keysPressedNow);
 
-// If you have anything else you need accessible from outside the logic.c
-// file, you can add them here. You likely won't.
+//return pointer to empty adjacent tile
 tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]);
+
+//return shuffled tile array
+void shuffleTiles(tile gameTiles[4][4]);
 #endif
