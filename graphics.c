@@ -36,15 +36,6 @@ void undrawAppState(AppState *state) {
 // For example, in a Snake game, draw the snake, the food, the score.
 void drawAppState(AppState *state) {
 	drawPlayer(state->playerX, state->playerY);
-
-	int x = state->emptyX;
-	int y = state->emptyY;
-	char strX[5];
-	sprintf(strX, "%d", x);
-	char strY[5];
-	sprintf(strY, "%d", y);
-	drawCenteredString(0, 0, 240, 160, strY , WHITE);
-
 	if (state->isMoved == 1){
 		//drawCenteredString(0, 0, 240, 160, "Moved." , WHITE);
 		/*

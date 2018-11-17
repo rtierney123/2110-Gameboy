@@ -46,14 +46,14 @@ int main(void) {
 			
             // Draw the start state here.
 			drawRectDMA(0, 60, 240, 40, BLUE);
-			drawCenteredString(0, 0, 240, 160, "Press A to start." , WHITE);
+			drawCenteredString(0, 0, 240, 160, "Press start." , WHITE);
 
             state = START_NODRAW;
             break;
         case START_NODRAW:
             //Check for a button press here to start the app.
             // Start the app by switching the state to APP_INIT.
-			if (KEY_JUST_PRESSED(BUTTON_A, currentButtons, previousButtons)) {
+			if (KEY_JUST_PRESSED(BUTTON_START, currentButtons, previousButtons)) {
 				state = APP_INIT;
 			}
 			

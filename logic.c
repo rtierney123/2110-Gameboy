@@ -51,12 +51,14 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 
     AppState nextAppState = *currentAppState;
 
-
+	
 
 	if (KEY_JUST_PRESSED(BUTTON_A, keysPressedBefore, keysPressedNow)) {
+		drawCenteredString(0, 0, 240, 160, "Moved." , WHITE);
 		nextAppState.isMoved = 1;
+	
 	} else {
-		nextAppState.isMoved = 0;
+		//nextAppState.isMoved = 0;
 	}
 
 	//register player keys
@@ -95,7 +97,12 @@ void initializeTiles(AppState *appState, const u16 *image){
 				appState->gameTiles[x][y].x = x;
 				appState->gameTiles[x][y].y = y;
 				appState->gameTiles[x][y].isEmpty = 0;
-			} 
+			}  else {
+				appState->gameTiles[x][y].image = getSingleColorImage(60, 40, BLACK);
+				appState->gameTiles[x][y].x = x;
+				appState->gameTiles[x][y].y = y;
+				appState->gameTiles[x][y].isEmpty = 1;
+			}
 			
 		}
 	}
