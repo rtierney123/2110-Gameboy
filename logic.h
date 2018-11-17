@@ -7,8 +7,6 @@ typedef struct{
 	u16 *image;
 	int x;
 	int y;
-	int correctX;
-	int correctY;
 	int isEmpty;
 } tile;
 
