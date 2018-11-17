@@ -103,8 +103,7 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 			nextAppState.playerX--;
 		}
 	}
-	//nextAppState.emptyX = 3;
-	//nextAppState.emptyY = 3;
+
 
     return nextAppState;
 }
