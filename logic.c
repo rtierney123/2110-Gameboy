@@ -2,6 +2,7 @@
 #include "gba.h"
 #include "stdio.h"
 #include "stdlib.h"
+#include "time.h"
 
 void initializeAppState(AppState* appState, const u16* gameImage) {
     // TA-TODO: Initialize everything that's part of this AppState struct here.
