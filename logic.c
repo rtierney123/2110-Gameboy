@@ -9,12 +9,13 @@ void initializeAppState(AppState* appState, const u16* gameImage) {
     // the value it should have when the app begins.
 	//Store all image info
 	initializeTiles(appState, gameImage);
+	shuffleTiles(appState);
 	//start player at bottom right
 	appState->playerX = 3;
 	appState->playerY = 3;
 	appState->isMoved = 0;
-	shuffleTiles(appState->gameTiles);
 
+	
 }
 
 // TA-TODO: Add any process functions for sub-elements of your app here.
@@ -52,8 +53,6 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
      */
 
     AppState nextAppState = *currentAppState;
-
-	
 
 	if (KEY_JUST_PRESSED(BUTTON_A, keysPressedBefore, keysPressedNow)) {
 		nextAppState.isMoved = 1;
@@ -98,16 +97,22 @@ void initializeTiles(AppState *appState, const u16 *image){
 				appState->gameTiles[x][y].x = x;
 				appState->gameTiles[x][y].y = y;
 				appState->gameTiles[x][y].isEmpty = 0;
+
 			}  else {
 				appState->gameTiles[x][y].image = getSingleColorImage(60, 40, BLACK);
 				appState->gameTiles[x][y].x = x;
 				appState->gameTiles[x][y].y = y;
 				appState->gameTiles[x][y].isEmpty = 1;
 			}
+			vector position;
+			position.x = x;
+			position.y = y;
+			appState->arrayPositions[x][y] = position;
 			
 		}
 	}
 }
+
 
 //return pointer to empty adjacent tile
 tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
@@ -132,8 +137,42 @@ tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
 		}
 }
 
+void shuffleTiles(AppState *state){
+	int shuffleNum = rand() % 50;
+	shuffleNum = shuffleNum + 10;
+
+	while (shuffleNum > 0){
+		int testX = rand() % 4;
+		int testY = rand() % 4;
+		tile* empty = findAdjacentEmptyTile(testX, testY, state->gameTiles);
+		if(empty != NULL){
+
+			tile currentTile = state->gameTiles[testX][testY];
+			int oldX = currentTile.x;
+			int oldY = currentTile.y;
+			int newX = empty->x;
+			int newY = empty->y;
+		
+			currentTile.x = newX;
+			currentTile.y = newY;
+			empty->x = oldX;
+			empty->y = oldY;
+
+			tile temp = *empty;
+			state->gameTiles[newX][newY] = currentTile;
+			state->gameTiles[oldX][oldY] = temp;
+
+			vector tempPosition = state->arrayPositions[oldX][oldY];
+			state->arrayPositions[oldX][oldY] =  state->arrayPositions[newX][newY];
+			state->arrayPositions[newX][newY] =  tempPosition;
+		}
+		shuffleNum--;
+	}
+}
+/*
 //return shuffled tile array
-void shuffleTiles(tile gameTiles[4][4]){
+void shuffleTiles(AppState *state){
+
 	int shuffleNum = rand() % 20;
 	shuffleNum = shuffleNum + 5;
 	
@@ -152,16 +191,32 @@ void shuffleTiles(tile gameTiles[4][4]){
 
 		if ((emptyX + chooseX <= 3 && emptyX + chooseX >= 0) &&
 				(emptyY + chooseY <= 3 && emptyY + chooseY >= 0)){
-			tile empty = gameTiles[emptyX][emptyY];
+			tile empty = state->gameTiles[emptyX][emptyY];
 			empty.x = emptyX + chooseX;
 			empty.y = emptyY + chooseY;
-			tile swapTile = gameTiles[emptyX + chooseX][emptyY + chooseY];
+			tile swapTile = state->gameTiles[emptyX + chooseX][emptyY + chooseY];
 			swapTile.x = emptyX;
 			swapTile.y = emptyY;
-			gameTiles[emptyX + chooseX][emptyY + chooseY] = empty;
-			gameTiles[emptyX][emptyY] = swapTile;
+			state->gameTiles[emptyX + chooseX][emptyY + chooseY] = empty;
+			state->gameTiles[emptyX][emptyY] = swapTile;
+
+			vector temp = state->arrayPositions[emptyX][emptyY];
+			state->arrayPositions[emptyX][emptyY] =  state->arrayPositions[emptyX + chooseX][emptyY + chooseY];
+			state->arrayPositions[emptyX + chooseX][emptyY + chooseY] =  temp;
 		}
 		shuffleNum--;
 	}
 }
+*/
+int checkForGameOver(AppState *state) {
+	for(int x = 0; x < 4; x++){
+		for (int y = 0; y < 4; y++){
+			if(state->arrayPositions[x][y].x != x || state->arrayPositions[x][y].y != y) {
+				return 0;
+			}	
+		}
+	}
+	return 1;
+}
+
 

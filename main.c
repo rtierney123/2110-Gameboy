@@ -61,7 +61,7 @@ int main(void) {
             break;
         case APP_INIT:
 			//set the image for the game
-			currentAppState.gameImage = getPartialImage(0, 0, 240, 160, 240, 160, path);
+			currentAppState.gameImage = getPartialImage(0, 0, 240, 160, 240, 160, doggie);
 
             // Initialize the app. Switch to the APP state.
             initializeAppState(&currentAppState, doggie);
@@ -88,8 +88,10 @@ int main(void) {
             currentAppState = nextAppState;
 
             // Check if the app is exiting. If it is, then go to the exit state.
-            if (nextAppState.gameOver) state = APP_EXIT;
-
+            if (nextAppState.gameOver) {
+				state = APP_EXIT;
+				drawCenteredString(0, 0, 240, 160, "You win!" , WHITE);
+			}
             break;
         case APP_EXIT:
             // Wait for VBlank

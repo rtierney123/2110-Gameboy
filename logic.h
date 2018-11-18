@@ -10,6 +10,11 @@ typedef struct{
 	int isEmpty;
 } tile;
 
+typedef struct{
+	int x;
+	int y;
+} vector;
+
 typedef struct {
     // Store whether or not the game is over in this member:
     int gameOver;
@@ -17,18 +22,8 @@ typedef struct {
 	u16 *gameImage;
 	int playerX;
 	int playerY;
-
 	int isMoved;
-    /*
-    * TA-TODO: Add any logical elements you need to keep track of in your app.
-    *
-    * For example, for a Snake game, those could be:
-    *
-    * Snake snake;
-    * Food foods[10];
-    * int points;
-    *
-    */
+	vector arrayPositions[4][4];
 
 } AppState;
 
@@ -62,5 +57,7 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]);
 
 //return shuffled tile array
-void shuffleTiles(tile gameTiles[4][4]);
+void shuffleTiles(AppState *state);
+
+int checkForGameOver(AppState *state);
 #endif

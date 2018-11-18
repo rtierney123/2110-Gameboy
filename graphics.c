@@ -58,18 +58,14 @@ void drawAppState(AppState *state) {
 			tile temp = *empty;
 			state->gameTiles[newX][newY] = currentTile;
 			state->gameTiles[oldX][oldY] = temp;
+
+			vector tempPosition = state->arrayPositions[oldX][oldY];
+			state->arrayPositions[oldX][oldY] =  state->arrayPositions[newX][newY];
+			state->arrayPositions[newX][newY] =  tempPosition;
+
+			state->gameOver = checkForGameOver(state);
 		}
 	
-		
-	
-		/*
-		int cX = state->playerX;
-		int cY = state->playerY;
-		int newX = state->emptyX;
-		int newY = state->emptyY;
-		tile currentTile = state->gameTiles[cX][cY];
-		drawImageDMA(60*newX, 40*newY, 60, 40, currentTile.image);
-		*/
 	}
 	
 }
