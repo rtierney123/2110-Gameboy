@@ -2,7 +2,6 @@
 #include "gba.h"
 #include "stdio.h"
 #include "stdlib.h"
-#include "time.h"
 
 void initializeAppState(AppState* appState, const u16* gameImage) {
     // TA-TODO: Initialize everything that's part of this AppState struct here.
@@ -139,10 +138,13 @@ tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
 }
 
 void shuffleTiles(AppState *state){
+	//int shuffleNum = randint(0,100);
 	int shuffleNum = rand() % 50;
 	shuffleNum = shuffleNum + 10;
 
 	while (shuffleNum > 0){
+		//int testX = randint(0, 3);
+		//int testY = randint(0, 3);
 		int testX = rand() % 4;
 		int testY = rand() % 4;
 		tile* empty = findAdjacentEmptyTile(testX, testY, state->gameTiles);
