@@ -139,7 +139,6 @@ tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
 }
 
 void shuffleTiles(AppState *state){
-	srand (time(NULL));
 	int shuffleNum = rand() % 50;
 	shuffleNum = shuffleNum + 10;
 
