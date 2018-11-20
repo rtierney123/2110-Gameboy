@@ -61,6 +61,10 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 		nextAppState.isMoved = 0;
 	}
 
+	if (KEY_JUST_PRESSED(BUTTON_B, keysPressedBefore, keysPressedNow)){
+		nextAppState.gameOver = 1;
+	}
+
 	//register player keys
 	if (KEY_JUST_PRESSED(BUTTON_UP, keysPressedBefore, keysPressedNow)) {
 		if (nextAppState.playerY > 0){
@@ -138,15 +142,15 @@ tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
 }
 
 void shuffleTiles(AppState *state){
-	//int shuffleNum = randint(0,100);
-	int shuffleNum = rand() % 50;
+	int shuffleNum = randint(0,100);
+	//int shuffleNum = rand() % 50;
 	shuffleNum = shuffleNum + 10;
 
 	while (shuffleNum > 0){
-		//int testX = randint(0, 3);
-		//int testY = randint(0, 3);
-		int testX = rand() % 4;
-		int testY = rand() % 4;
+		int testX = randint(0, 3);
+		int testY = randint(0, 3);
+		//int testX = rand() % 4;
+		//int testY = rand() % 4;
 		tile* empty = findAdjacentEmptyTile(testX, testY, state->gameTiles);
 		if(empty != NULL){
 
