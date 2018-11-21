@@ -123,7 +123,6 @@ void initializeTiles(AppState *appState, const u16 *image){
 
 //return pointer to empty adjacent tile
 tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
-	
 		//test for empty left
 		if (cX > 0 &&  gameTiles[cX-1][cY].isEmpty == 1) {
 			return &gameTiles[cX-1][cY];
