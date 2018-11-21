@@ -143,15 +143,13 @@ tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
 			return NULL;
 		}
 }
-
+//shuffles the tiles around 
 void shuffleTiles(AppState *state){
-	//int shuffleNum = randint(0,100);
-	int shuffleNum = rand() % 50;
-	shuffleNum = shuffleNum + 10;
+	srand(50 * vBlankCounter);
+	int shuffleNum = rand() % 500;
+	shuffleNum = shuffleNum + 200;
 
 	while (shuffleNum > 0){
-		//int testX = randint(0, 3);
-		//int testY = randint(0, 3);
 		int testX = rand() % 4;
 		int testY = rand() % 4;
 		tile* empty = findAdjacentEmptyTile(testX, testY, state->gameTiles);
@@ -179,7 +177,7 @@ void shuffleTiles(AppState *state){
 		shuffleNum--;
 	}
 }
-
+//returns whether the picture is completed
 int checkForGameOver(AppState *state) {
 	for(int x = 0; x < 4; x++){
 		for (int y = 0; y < 4; y++){

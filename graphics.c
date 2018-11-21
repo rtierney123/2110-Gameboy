@@ -36,6 +36,7 @@ void undrawAppState(AppState *state) {
 // For example, in a Snake game, draw the snake, the food, the score.
 void drawAppState(AppState *state) {
 	drawPlayer(state->playerX, state->playerY);
+	//checks if a was press and slides tile into empty space if can
 	if (state->isMoved == 1){
 		int pX = state->playerX;
 		int pY = state->playerY;
@@ -75,6 +76,7 @@ void drawPlayer(int pX, int pY){
 	drawEmptyRect(60 * pX, 40 * pY, 60, 40, 4, WHITE);
 }
 
+//draws the initial state of the app, with the tiles in the correct order
 void drawAllTiles(AppState *appState){
 	for(int x = 0; x < 4; x++){
 		for (int y = 0; y < 4; y++){

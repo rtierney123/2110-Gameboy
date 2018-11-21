@@ -105,6 +105,7 @@ int main(void) {
 			} 
             break;
 		case CHECK_MENU:
+			//check if B was pressed or not
 			if(checkForGameOver(&currentAppState)){
 				state = APP_EXIT;
 			} else{
@@ -114,7 +115,7 @@ int main(void) {
         case APP_EXIT:
             // Wait for VBlank
             waitForVBlank();
-
+			//show Win screen
 			if (currentAppState.imageChosen == 1){
 				drawFullScreenImageDMA(doggie);
 			}
@@ -122,7 +123,7 @@ int main(void) {
             state = APP_EXIT_NODRAW;
             break;
         case APP_EXIT_NODRAW:
-            // TA-TODO: Check for a button press here to go back to the start screen
+            // listens for B to return to main menu
 			if (KEY_JUST_PRESSED(BUTTON_B, currentButtons, previousButtons)) {
 				state = START;
 			}

@@ -27,6 +27,11 @@ static int qran(void) {
     return (__qran_seed>>16) & 0x7FFF;
 }
 
+void seed_qran(int seed) {
+    __qran_seed = seed;
+}
+
+
 int randint(int min, int max) {
     return (qran()*(max-min)>>15)+min;
 }

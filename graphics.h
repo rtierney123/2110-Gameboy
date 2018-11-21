@@ -24,7 +24,4 @@ void drawAllTiles(AppState *appState);
 //draw player according to new dir
 void drawPlayer(int pX, int pY);
 
-int getDrawY(int y);
-int getDrawX(int x);
-
 #endif

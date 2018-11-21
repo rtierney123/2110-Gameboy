@@ -130,7 +130,8 @@ void waitForVBlank(void);
  * @return     random number in the given range.
  */
 int randint(int min, int max);
-
+//seed rand int
+void seed_qran(int seed);
 // ---------------------------------------------------------------------------
 //                       DRAWING
 // ---------------------------------------------------------------------------
