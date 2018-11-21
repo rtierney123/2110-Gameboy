@@ -100,28 +100,33 @@ int main(void) {
 						free(currentAppState.gameTiles[x][y].image);
 					}
 				}
-				free(currentAppState.gameImage);
-				drawCenteredString(0, 0, 240, 160, "You win!" , WHITE);
+				
+				
 			} 
             break;
 		case CHECK_MENU:
 			if(checkForGameOver(&currentAppState)){
-				state = START;
-			} else{
 				state = APP_EXIT;
+				free(currentAppState.gameImage);
+			} else{
+				state = START;
 			}
 			break;
         case APP_EXIT:
             // Wait for VBlank
             waitForVBlank();
 
-            // TA-TODO: Draw the exit / gameover screen
-
+			drawFullScreenImageDMA(currentAppState.gameImage);
+			drawCenteredString(0, 0, 240, 160, "You win!" , WHITE);
             state = APP_EXIT_NODRAW;
             break;
         case APP_EXIT_NODRAW:
             // TA-TODO: Check for a button press here to go back to the start screen
-			//state = START;
+			if (KEY_JUST_PRESSED(BUTTON_START, currentButtons, previousButtons)) {
+				state = START;
+				free(currentAppState.gameImage);
+			}
+			
             break;
         }
 
