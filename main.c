@@ -19,6 +19,7 @@ typedef enum {
     START_NODRAW,
     APP_INIT,
     APP,
+	CHECK_MENU,
     APP_EXIT,
     APP_EXIT_NODRAW,
 } GBAState;
@@ -92,7 +93,7 @@ int main(void) {
 
             // Check if the app is exiting. If it is, then go to the exit state.
             if (nextAppState.gameOver) {
-				state = START;
+				state = CHECK_MENU;
 				currentAppState.gameOver = 0;
 				for (int x = 0; x < 4; x++){
 					for (int y = 0; y < 4; y++){
@@ -103,6 +104,13 @@ int main(void) {
 				drawCenteredString(0, 0, 240, 160, "You win!" , WHITE);
 			} 
             break;
+		case CHECK_MENU:
+			if(checkForGameOver(&currentAppState)){
+				state = START;
+			} else{
+				state = APP_EXIT;
+			}
+			break;
         case APP_EXIT:
             // Wait for VBlank
             waitForVBlank();
