@@ -60,11 +60,12 @@ AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 k
 	} else {
 		nextAppState.isMoved = 0;
 	}
-	
+	/*
 	if (KEY_JUST_PRESSED(BUTTON_B, keysPressedBefore, keysPressedNow)) {
-		nextAppState.goToMenu = 1;
-	}
+		nextAppState.gameOver = 1;
 	
+	}
+	*/
 
 	//register player keys
 	if (KEY_JUST_PRESSED(BUTTON_UP, keysPressedBefore, keysPressedNow)) {
@@ -178,6 +179,47 @@ void shuffleTiles(AppState *state){
 	}
 }
 
+
+
+/*
+//return shuffled tile array
+void shuffleTiles(AppState *state){
+
+	int shuffleNum = rand() % 20;
+	shuffleNum = shuffleNum + 5;
+	
+	int emptyX = 3;
+	int emptyY = 3;
+	while (shuffleNum > 0){
+
+		int chooseX = rand() % 2;
+		if (chooseX == 0){
+			chooseX = -1;
+		}
+		int chooseY = rand() % 2;
+		if (chooseY == 0){
+			chooseY = -1;
+		}
+
+		if ((emptyX + chooseX <= 3 && emptyX + chooseX >= 0) &&
+				(emptyY + chooseY <= 3 && emptyY + chooseY >= 0)){
+			tile empty = state->gameTiles[emptyX][emptyY];
+			empty.x = emptyX + chooseX;
+			empty.y = emptyY + chooseY;
+			tile swapTile = state->gameTiles[emptyX + chooseX][emptyY + chooseY];
+			swapTile.x = emptyX;
+			swapTile.y = emptyY;
+			state->gameTiles[emptyX + chooseX][emptyY + chooseY] = empty;
+			state->gameTiles[emptyX][emptyY] = swapTile;
+
+			vector temp = state->arrayPositions[emptyX][emptyY];
+			state->arrayPositions[emptyX][emptyY] =  state->arrayPositions[emptyX + chooseX][emptyY + chooseY];
+			state->arrayPositions[emptyX + chooseX][emptyY + chooseY] =  temp;
+		}
+		shuffleNum--;
+	}
+}
+*/
 int checkForGameOver(AppState *state) {
 	for(int x = 0; x < 4; x++){
 		for (int y = 0; y < 4; y++){

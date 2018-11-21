@@ -94,7 +94,6 @@ int main(void) {
             if (nextAppState.gameOver) {
 				state = START;
 				currentAppState.gameOver = 0;
-
 				for (int x = 0; x < 4; x++){
 					for (int y = 0; y < 4; y++){
 						free(currentAppState.gameTiles[x][y].image);
