@@ -59,5 +59,8 @@ tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]);
 //return shuffled tile array
 void shuffleTiles(AppState *state);
 
+
+
+
 int checkForGameOver(AppState *state);
 #endif

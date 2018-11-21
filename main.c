@@ -1,4 +1,5 @@
 #include "gba.h"
+#include "stdlib.h"
 #include "logic.h"
 #include "graphics.h"
 #include "images/doggie.h"
@@ -45,8 +46,10 @@ int main(void) {
             waitForVBlank();
 			
             // Draw the start state here.
+			drawRectDMA(0, 0, 240, 160, BLACK);
 			drawRectDMA(0, 60, 240, 40, BLUE);
 			drawCenteredString(0, 0, 240, 160, "Press start." , WHITE);
+			
 
             state = START_NODRAW;
             break;
@@ -89,9 +92,16 @@ int main(void) {
 
             // Check if the app is exiting. If it is, then go to the exit state.
             if (nextAppState.gameOver) {
-				state = APP_EXIT;
+				state = START;
+				currentAppState.gameOver = 0;
+				for (int x = 0; x < 4; x++){
+					for (int y = 0; y < 4; y++){
+						free(currentAppState.gameTiles[x][y].image);
+					}
+				}
+				free(currentAppState.gameImage);
 				drawCenteredString(0, 0, 240, 160, "You win!" , WHITE);
-			}
+			} 
             break;
         case APP_EXIT:
             // Wait for VBlank
@@ -103,7 +113,7 @@ int main(void) {
             break;
         case APP_EXIT_NODRAW:
             // TA-TODO: Check for a button press here to go back to the start screen
-
+			//state = START;
             break;
         }
 
