@@ -54,13 +54,11 @@ void initializeAppState(AppState *appState, const u16* gameImage);
 AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 keysPressedNow);
 
 //return pointer to empty adjacent tile
-tile *findAdjacentEmptyTile(int cX, int cY, tile* gameTiles[4][4]);
+tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]);
 
 //return shuffled tile array
 void shuffleTiles(AppState *state);
 
-
-
-
+//return boolean whether to return to start menu
 int checkForGameOver(AppState *state);
 #endif
