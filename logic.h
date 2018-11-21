@@ -19,7 +19,7 @@ typedef struct {
     // Store whether or not the game is over in this member:
     int gameOver;
 	tile gameTiles[4][4];
-	u16 *gameImage;
+	int imageChosen;
 	int playerX;
 	int playerY;
 	int isMoved;
