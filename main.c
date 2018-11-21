@@ -48,8 +48,9 @@ int main(void) {
             waitForVBlank();
 			
             // Draw the start state here.
-			drawFullScreenImageDMA(startScreen);
-			drawCenteredString(0, 0, 240, 160, "Press start." , BLACK);
+			drawRectDMA(0, 0, 240, 160, BLACK);
+			drawRectDMA(0, 60, 240, 40, BLUE);
+			drawCenteredString(0, 0, 240, 160, "Press start." , WHITE);
 			
 
             state = START_NODRAW;
@@ -118,7 +119,7 @@ int main(void) {
 			if (currentAppState.imageChosen == 1){
 				drawFullScreenImageDMA(doggie);
 			}
-			drawCenteredString(0, 0, 240, 160, "You win! Press B to Return to Start" , BLACK);
+			drawCenteredString(0, 0, 240, 160, "You win! Press B to Return to Start" , WHITE);
             state = APP_EXIT_NODRAW;
             break;
         case APP_EXIT_NODRAW:
