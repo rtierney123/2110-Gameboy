@@ -39,7 +39,7 @@ void drawAppState(AppState *state) {
 	if (state->isMoved == 1){
 		int pX = state->playerX;
 		int pY = state->playerY;
-		tile* empty = findAdjacentEmptyTile(pX, pY, state->gameTiles);
+		tile* empty = findAdjacentEmptyTile(pX, pY, &(state->gameTiles));
 
 		if(empty != NULL){
 
