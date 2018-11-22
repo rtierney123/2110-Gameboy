@@ -122,22 +122,22 @@ void initializeTiles(AppState *appState, const u16 *image){
 
 
 //return pointer to empty adjacent tile
-tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]){
+tile *findAdjacentEmptyTile(AppState *appState, int cX, int cY){
 		//test for empty left
-		if (cX > 0 &&  gameTiles[cX-1][cY].isEmpty == 1) {
-			return &gameTiles[cX-1][cY];
+		if (cX > 0 &&  appState->gameTiles[cX-1][cY].isEmpty == 1) {
+			return &appState->gameTiles[cX-1][cY];
 		}
 		//test for empty right
-		else if(cX < 3 &&  gameTiles[cX+1][cY].isEmpty == 1) {
-			return &gameTiles[cX+1][cY];
+		else if(cX < 3 &&  appState->gameTiles[cX+1][cY].isEmpty == 1) {
+			return &appState->gameTiles[cX+1][cY];
 		}
 		//test for empty top
-		else if (cY > 0 && gameTiles[cX][cY-1].isEmpty == 1) {
-			return &gameTiles[cX][cY-1];
+		else if (cY > 0 && appState->gameTiles[cX][cY-1].isEmpty == 1) {
+			return &appState->gameTiles[cX][cY-1];
 		}
 		//test for empty bottom
-		else if (cY < 3 &&  gameTiles[cX][cY+1].isEmpty == 1) {
-			return &gameTiles[cX][cY+1];
+		else if (cY < 3 &&  appState->gameTiles[cX][cY+1].isEmpty == 1) {
+			return &appState->gameTiles[cX][cY+1];
 		} else {
 			return NULL;
 		}
@@ -151,7 +151,7 @@ void shuffleTiles(AppState *state){
 	while (shuffleNum > 0){
 		int testX = rand() % 4;
 		int testY = rand() % 4;
-		tile* empty = findAdjacentEmptyTile(testX, testY, state->gameTiles);
+		tile* empty = findAdjacentEmptyTile(state, testX, testY);
 		if(empty != NULL){
 
 			tile currentTile = state->gameTiles[testX][testY];

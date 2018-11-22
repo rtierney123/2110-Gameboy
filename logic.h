@@ -18,11 +18,17 @@ typedef struct{
 typedef struct {
     // Store whether or not the game is over in this member:
     int gameOver;
+	//tile array for moving tiles
 	tile gameTiles[4][4];
+	//integer cooresponding to image that is stored in tile array
 	int imageChosen;
+	//x position of playser pointer
 	int playerX;
+	//y position of player pointer
 	int playerY;
+	//registered if a tile was attempted to be moved
 	int isMoved;
+	//array shows how the tiles have be swapped
 	vector arrayPositions[4][4];
 
 } AppState;
@@ -54,9 +60,9 @@ void initializeAppState(AppState *appState, const u16* gameImage);
 AppState processAppState(AppState *currentAppState, u32 keysPressedBefore, u32 keysPressedNow);
 
 //return pointer to empty adjacent tile
-tile *findAdjacentEmptyTile(int cX, int cY, tile gameTiles[4][4]);
+tile *findAdjacentEmptyTile(AppState *state, int cX, int cY);
 
-//return shuffled tile array
+//shuffle tiles array in appstate
 void shuffleTiles(AppState *state);
 
 //return boolean whether to return to start menu
